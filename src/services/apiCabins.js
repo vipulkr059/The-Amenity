@@ -23,6 +23,7 @@ export async function deleteCabins(id) {
 }
 
 export async function createCabin(newCabin) {
+  console.log(newCabin);
   //Creating cabin
   const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
     "/",
