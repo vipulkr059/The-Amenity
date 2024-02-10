@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabins } from "../services/apiCabins";
 import toast from "react-hot-toast";
+import { HiPencil, HiTrash } from "react-icons/hi2";
+import { useState } from "react";
+import CreateCabinForm from "./CreateCabinForm";
 
 const TableRow = styled.div`
   display: grid;
@@ -52,6 +55,7 @@ export const CabinRow = ({ cabin }) => {
     maxCapacity,
   } = cabin;
   const queryClient = useQueryClient();
+  const [showForm, setshowForm] = useState(false);
   const { isLoading, mutate } = useMutation({
     mutationFn: deleteCabins,
     onSuccess: () => {
@@ -63,15 +67,26 @@ export const CabinRow = ({ cabin }) => {
     onError: (err) => toast.error(err.message),
   });
   return (
-    <TableRow>
-      <Img src={image} alt="cabin image" />
-      <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity}</div>
-      <Price>{regularPrice}</Price>
-      <Discount>{discount}</Discount>
-      <button onClick={() => mutate(cabinId)} disabled={isLoading}>
-        Delete
-      </button>
-    </TableRow>
+    <>
+      <TableRow>
+        <Img src={image} alt="cabin image" />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity}</div>
+        <Price>{regularPrice}</Price>
+        <Discount>{discount}</Discount>
+        <div>
+          <button
+            onClick={() => setshowForm((show) => !show)}
+            disabled={isLoading}
+          >
+            <HiPencil />
+          </button>
+          <button onClick={() => mutate(cabinId)} disabled={isLoading}>
+            <HiTrash />
+          </button>
+        </div>
+      </TableRow>
+      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+    </>
   );
 };
