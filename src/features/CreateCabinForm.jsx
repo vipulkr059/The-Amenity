@@ -30,9 +30,13 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     if (isEditSession)
       editCabins({ newCabinData: { ...data, image: image }, id: editId });
     else {
-      createCabins({ ...data, image: image });
+      createCabins(
+        { ...data, image: image },
+        {
+          onSuccess: () => reset(),
+        }
+      );
     }
-    // mutate({ ...data, image: data.image[0] });
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +88,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           {...register("discount", {
             required: "This field is required",
             validate: (value) =>
-              value <= getValues().regularPrice ||
+              getValues().regularPrice >= value ||
               "Discount should be less than regular price",
           })}
         />
