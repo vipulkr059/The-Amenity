@@ -24,22 +24,26 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log(data);
     const image = typeof data.image === "string" ? data.image : data.image[0];
-
+    console.log(image);
     if (isEditSession)
-      editCabins({ newCabinData: { ...data, image: image }, id: editId });
-    else {
-      createCabins(
-        { ...data, image: image },
+      editCabins(
+        { newCabinData: { ...data, image: image }, id: editId },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             reset();
-            onCloseModal();
           },
         }
       );
-    }
+    else
+      createCabins(
+        { ...data, image: image },
+        {
+          onSuccess: (data) => {
+            reset();
+          },
+        }
+      );
   }
   return (
     <Form
@@ -110,13 +114,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Cabin Photo" error={errors?.image?.message}>
+      <FormRow label="Cabin photo">
         <FileInput
-          disabled={isLoading}
           id="image"
           accept="image/*"
           {...register("image", {
-            required: isEditSession ? false : "this field is required",
+            required: isEditSession ? false : "This field is required",
           })}
         />
       </FormRow>
