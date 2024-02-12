@@ -9,18 +9,7 @@ import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+import { Table } from "../../ui/Table";
 
 const Img = styled.img`
   display: block;
@@ -76,7 +65,7 @@ export const CabinRow = ({ cabin }) => {
   };
 
   return (
-    <TableRow>
+    <Table.Row>
       <Img src={image} alt="cabin image" />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity}</div>
@@ -96,12 +85,12 @@ export const CabinRow = ({ cabin }) => {
             <CreateCabinForm cabinToEdit={cabin} />
           </Modal.Window>
 
-          <Modal.Open>
+          <Modal.Open opens="delete-cabin">
             <button disabled={isDeleting}>
               <HiTrash />
             </button>
           </Modal.Open>
-          <Modal.Window>
+          <Modal.Window name="delete-cabin">
             <ConfirmDelete
               resource="cabins"
               disabled={isDeleting}
@@ -110,6 +99,6 @@ export const CabinRow = ({ cabin }) => {
           </Modal.Window>
         </Modal>
       </div>
-    </TableRow>
+    </Table.Row>
   );
 };
