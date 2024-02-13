@@ -2,10 +2,9 @@ import supabase from "./supabase";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
 export async function getCabins() {
-  let { data, error } = await supabase.from("cabins").select("*");
+  const { data, error } = await supabase.from("cabins").select("*");
 
   if (error) {
-    console.log(error);
     throw new Error("Something wrong with cabins data");
   }
 

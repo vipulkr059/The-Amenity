@@ -5,18 +5,9 @@ import SortBy from "../../ui/SortBy";
 import Cabins from "../../pages/Cabins";
 
 const filterOption = [
-  {
-    value: "all",
-    label: "All",
-  },
-  {
-    value: "no-discount",
-    label: "No Discount",
-  },
-  {
-    value: "with-discount",
-    label: "With Discount",
-  },
+  { value: "all", label: "All" },
+  { value: "no-discount", label: "No discount" },
+  { value: "with-discount", label: "With discount" },
 ];
 
 const sortOptions = [
