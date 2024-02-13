@@ -20,6 +20,15 @@ export const CabinTable = () => {
     filteredCabins = cabins;
   }
 
+  //sorting
+  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+
+  const sortedCabins = filteredCabins.sort(
+    (a, b) => (a[field] - b[field]) * modifier
+  );
+
   if (isLoading) return <Spinner />;
   return (
     <Table role="table" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
@@ -32,7 +41,7 @@ export const CabinTable = () => {
         <div></div>
       </Table.Header>
       <Table.Body
-        data={filteredCabins}
+        data={sortedCabins}
         render={(cabin) => {
           return <CabinRow key={cabin.id} cabin={cabin} />;
         }}
