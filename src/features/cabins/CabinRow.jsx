@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import CreateCabinForm from "./CreateCabinForm";
@@ -39,7 +38,6 @@ const Discount = styled.div`
 `;
 
 export const CabinRow = ({ cabin }) => {
-  const [showForm, setshowForm] = useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabins } = useCreateCabin();
 
