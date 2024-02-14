@@ -14,7 +14,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useBooking } from "../bookings/useBooking";
 // import { useDeleteBooking } from './useDeleteBooking';
 import { useMoveBack } from "../../hooks/useMoveBack";
-// import { useCheckout } from 'features/check-in-out/useCheckout';
+import { useCheckout } from "../check-in-out/useCheckOut";
 import ButtonText from "../../ui/ButtonText";
 // import Empty from "../..ui/Empty";
 
@@ -27,7 +27,7 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const { booking, isLoading, error } = useBooking();
   // const { mutate: deleteBooking, isLoading: isDeleting } = useDeleteBooking();
-  // const { mutate: checkout, isLoading: isCheckingOut } = useCheckout();
+  const { checkout, isCheckingOut } = useCheckout();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();

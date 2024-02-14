@@ -16,9 +16,10 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 // import { useDeleteBooking } from 'features/bookings/useDeleteBooking';
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
-// import { useCheckout } from 'features/check-in-out/useCheckout';
+import { useCheckout } from "../check-in-out/useCheckOut";
 import { format, isToday } from "date-fns";
 import { Table } from "../../ui/Table";
+import Modal from "../../ui/Modal";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -61,8 +62,8 @@ function BookingRow({
     cabins: { name: cabinName },
   },
 }) {
-  // const { mutate: deleteBooking, isLoading: isDeleting } = useDeleteBooking();
-  // const { mutate: checkout, isLoading: isCheckingOut } = useCheckout();
+  // const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { checkout, isCheckingOut } = useCheckout();
 
   const navigate = useNavigate();
 
@@ -99,40 +100,45 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-
-      <Menus.Menu>
-        <Menus.Toggle id={bookingId} />
-        <Menus.List id={bookingId}>
-          <Menus.Button
-            icon={<HiEye />}
-            onClick={() => navigate(`/bookings/${bookingId}`)}
-          >
-            See Details
-          </Menus.Button>
-          {status === "unconfirmed" && (
+      <Modal>
+        <Menus.Menu>
+          <Menus.Toggle id={bookingId} />
+          <Menus.List id={bookingId}>
             <Menus.Button
-              icon={<HiArrowDownOnSquare />}
-              onClick={() => navigate(`/checkin/${bookingId}`)}
+              icon={<HiEye />}
+              onClick={() => navigate(`/bookings/${bookingId}`)}
             >
-              Check In
+              See Details
             </Menus.Button>
-          )}
-        </Menus.List>
-      </Menus.Menu>
+            {status === "unconfirmed" && (
+              <Menus.Button
+                icon={<HiArrowDownOnSquare />}
+                onClick={() => navigate(`/checkin/${bookingId}`)}
+              >
+                Check In
+              </Menus.Button>
+            )}
 
-      {/* <div>
-        <ButtonWithConfirm
-          title='Delete booking'
-          description='Are you sure you want to delete this booking? This action can NOT be undone.'
-          confirmBtnLabel='Delete'
-          onConfirm={() => deleteBooking(bookingId)}
-          disabled={isDeleting}
-        >
-          Delete
-        </ButtonWithConfirm>
+            {status === "checked-in" && (
+              <Menus.Button
+                icon={<HiArrowUpOnSquare />}
+                onClick={() => checkout(bookingId)}
+              >
+                Check Out
+              </Menus.Button>
+            )}
 
-        <Link to={`/bookings/${bookingId}`}>Details &rarr;</Link>
-      </div> */}
+            <Modal.Open opens="delete">
+              <Menus.Button icon={<HiTrash />} onClick={() => {}}>
+                Delete Booking
+              </Menus.Button>
+            </Modal.Open>
+          </Menus.List>
+        </Menus.Menu>
+        <Modal.Window name="delete">
+          <ConfirmDelete resource="booking" onConfirm={() => {}} />
+        </Modal.Window>
+      </Modal>
     </Table.Row>
   );
 }

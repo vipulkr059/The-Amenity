@@ -46,20 +46,20 @@ function CheckinBooking() {
     numNights,
   } = booking;
 
-  // const optionalBreakfastPrice =
-  //   numNights * settings.breakfastPrice * numGuests;
+  const optionalBreakfastPrice =
+    numNights * settings.breakfastPrice * numGuests;
 
   function handleCheckin() {
     if (!confirmPaid) return;
-    // if (addBreakfast)
-    //   checkin({
-    //     bookingId,
-    //     breakfast: {
-    //       hasBreakfast: true,
-    //       extrasPrice: optionalBreakfastPrice,
-    //       totalPrice: totalPrice + optionalBreakfastPrice,
-    //     },
-    //   });
+    if (addBreakfast)
+      checkin({
+        bookingId,
+        breakfast: {
+          hasBreakfast: true,
+          extrasPrice: optionalBreakfastPrice,
+          totalPrice: totalPrice + optionalBreakfastPrice,
+        },
+      });
     else checkin({ bookingId, breakfast: {} });
   }
 
@@ -71,6 +71,22 @@ function CheckinBooking() {
       </Row>
 
       <BookingDataBox booking={booking} />
+
+      {!hasBreakfast && (
+        <Box>
+          <Checkbox
+            checked={addBreakfast}
+            onChange={() => {
+              setAddBreakfast((add) => !add);
+              setConfirmPaid(false);
+            }}
+            id="breakfast"
+          >
+            Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
+          </Checkbox>
+        </Box>
+      )}
+
       <Box>
         <Checkbox
           checked={confirmPaid}
