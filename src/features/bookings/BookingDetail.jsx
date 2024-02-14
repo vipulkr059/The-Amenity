@@ -12,10 +12,10 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 
 import { useBooking } from "../bookings/useBooking";
-// import { useDeleteBooking } from './useDeleteBooking';
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useCheckout } from "../check-in-out/useCheckOut";
 import ButtonText from "../../ui/ButtonText";
+import { useDeleteBooking } from "./useDeleteBooking";
 // import Empty from "../..ui/Empty";
 
 const HeadingGroup = styled.div`
@@ -26,7 +26,7 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading, error } = useBooking();
-  // const { mutate: deleteBooking, isLoading: isDeleting } = useDeleteBooking();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const { checkout, isCheckingOut } = useCheckout();
 
   const moveBack = useMoveBack();
@@ -68,21 +68,20 @@ function BookingDetail() {
             Check out
           </Button>
         )}
-
-        {/* <Modal>
-          <Modal.Toggle opens="delete">
-            <Button variation="danger">Delete booking</Button>
-          </Modal.Toggle>
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button variation="danger">Delete Booking</Button>
+          </Modal.Open>
           <Modal.Window name="delete">
             <ConfirmDelete
               resource="booking"
-              // These options will be passed wherever the function gets called, and they determine what happens next
-              onConfirm={(options) => deleteBooking(bookingId, options)}
+              onConfirm={() =>
+                deleteBooking(bookingId, { onSettled: () => navigate(-1) })
+              }
               disabled={isDeleting}
             />
           </Modal.Window>
-        </Modal> */}
-
+        </Modal>
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>

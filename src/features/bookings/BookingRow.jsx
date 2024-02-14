@@ -10,16 +10,15 @@ import {
 
 import Tag from "../../ui/Tag";
 import Menus from "../../ui/Menus";
-// import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 
-// import { useDeleteBooking } from 'features/bookings/useDeleteBooking';
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import { useCheckout } from "../check-in-out/useCheckOut";
 import { format, isToday } from "date-fns";
 import { Table } from "../../ui/Table";
 import Modal from "../../ui/Modal";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -62,7 +61,7 @@ function BookingRow({
     cabins: { name: cabinName },
   },
 }) {
-  // const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const { checkout, isCheckingOut } = useCheckout();
 
   const navigate = useNavigate();
@@ -136,7 +135,10 @@ function BookingRow({
           </Menus.List>
         </Menus.Menu>
         <Modal.Window name="delete">
-          <ConfirmDelete resource="booking" onConfirm={() => {}} />
+          <ConfirmDelete
+            resource="booking"
+            onConfirm={() => deleteBooking(bookingId)}
+          />
         </Modal.Window>
       </Modal>
     </Table.Row>
