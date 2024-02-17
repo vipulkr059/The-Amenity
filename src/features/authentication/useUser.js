@@ -7,5 +7,10 @@ export function useUser() {
     queryFn: getCurrentUser,
   });
 
-  return { user, isLoading, isAuthenticated: user?.role === "authenticated" };
+  return {
+    user,
+    isLoading,
+    isAuthenticated: user?.role === "authenticated",
+    isReadOnly: user?.role === "supabase_read_only_user",
+  };
 }

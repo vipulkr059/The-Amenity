@@ -10,7 +10,7 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import { useLogin } from "./useLogin";
 
 function LoginForm() {
-  const [email, setEmail] = useState("vipul@amenity.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading } = useLogin();
 
@@ -55,6 +55,10 @@ function LoginForm() {
         <Button size="large" disabled={isLoading}>
           {!isLoading ? "Log In" : <SpinnerMini />}
         </Button>
+      </FormRow>
+      <FormRow orientation="vertical">
+        <p>Demo Account</p>
+        <p>User : DevAmenity@amentiy.com - Pwd : 12345678</p>
       </FormRow>
     </Form>
   );

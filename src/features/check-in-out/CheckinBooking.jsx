@@ -16,7 +16,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 
 import styled from "styled-components";
 import { useSettings } from "../../features/settings/useSettings";
-import { useCheckIn } from "./useCheckin";
+import { useCheckIn } from "../check-in-out/useCheckin";
 
 // import {box} from ""
 
