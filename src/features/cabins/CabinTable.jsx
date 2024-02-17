@@ -4,6 +4,7 @@ import { useCabins } from "./useCabins";
 import { Table } from "../../ui/Table";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
+import Menus from "../../ui/Menus";
 
 export const CabinTable = () => {
   const { isLoading, cabins, error } = useCabins();
@@ -31,24 +32,26 @@ export const CabinTable = () => {
   );
 
   return (
-    <Table role="table" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
-      <Table.Header role="row">
-        <div></div>
-        <div>cabin</div>
-        <div>capacity</div>
-        <div>price</div>
-        <div>discount</div>
-        <div></div>
-      </Table.Header>
-      <Table.Body
-        data={filteredCabins}
-        render={(cabin) => {
-          return <CabinRow key={cabin.id} cabin={cabin} />;
-        }}
-      ></Table.Body>
-      {/* {cabins.map((cabin) => {
+    <Menus>
+      <Table role="table" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+        <Table.Header role="row">
+          <div></div>
+          <div>cabin</div>
+          <div>capacity</div>
+          <div>price</div>
+          <div>discount</div>
+          <div></div>
+        </Table.Header>
+        <Table.Body
+          data={filteredCabins}
+          render={(cabin) => {
+            return <CabinRow key={cabin.id} cabin={cabin} />;
+          }}
+        ></Table.Body>
+        {/* {cabins.map((cabin) => {
         return <CabinRow key={cabin.id} cabin={cabin} />;
       })} */}
-    </Table>
+      </Table>
+    </Menus>
   );
 };
