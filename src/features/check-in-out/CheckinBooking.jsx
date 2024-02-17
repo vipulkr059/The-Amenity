@@ -16,9 +16,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 
 import styled from "styled-components";
 import { useSettings } from "../../features/settings/useSettings";
-import { useCheckIn } from "../check-in-out/useCheckin";
-
-// import {box} from ""
+import { useCheckIn } from "./useCheckIn";
 
 const Box = styled.div`
   padding: 2.4rem 4rem;
