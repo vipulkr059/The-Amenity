@@ -1,8 +1,20 @@
-# React + Vite
+# The Amenity 
+# A fullstack Hotel bookings management tool , based on React, Supabase, Styled-Components, React-Query.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features:
 
-Currently, two official plugins are available:
+- Real-time bookings updates.
+- Delete & Edit Cabins Data.
+- Create New Cabin with Images
+- Dashboard To Visualize and Monitor Booking Data.
+- Sorting Based on Various fields.
+- Check-In & Check-Out Feature.
+- Listing Checked-In Customers.
+- Login and Authentication To Provide Access To Authorized Users.
+- Beautiful UI using Styled-Component.
+- Light / Dark mode
+- PostGres database using Supabase.
+- Authentication with Supabase.
+  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
