@@ -18,8 +18,7 @@ import { CheckIn } from "./pages/CheckIn";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { LandingPage } from "./pages/LandingPage";
-import { Reservation } from "./pages/Reservation";
-
+import Reservation from "./pages/Reservation";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
