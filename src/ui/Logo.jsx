@@ -6,18 +6,19 @@ const StyledLogo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 12.6rem;
+  height: ${(props) => props.height};
   width: auto;
 `;
 
-function Logo() {
+function Logo({ height }) {
+  console.log(height);
   const { isDarkMode } = useDarkMode();
   const src = isDarkMode
     ? "/logo-no-background.png"
     : "/logo-no-background.png";
   return (
     <StyledLogo>
-      <Img src={src} alt="Logo" />
+      <Img src={src} alt="Logo" height={height ? height : "12.6rem"} />
     </StyledLogo>
   );
 }
