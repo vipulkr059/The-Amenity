@@ -32,7 +32,6 @@ const NavbarLink = styled.li`
 
 const LandingNav = () => {
   const { user } = useUser();
-  console.log(user);
   return (
     <NavbarContainer>
       <Logo height="7rem" />

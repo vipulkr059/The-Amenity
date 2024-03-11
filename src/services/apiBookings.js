@@ -126,3 +126,31 @@ export async function getStaysTodayActivity() {
   }
   return data;
 }
+
+export async function getBookingByCabinId(id) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("startDate, endDate")
+    .eq("cabinId", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking not found for this cabin");
+  }
+
+  return data;
+}
+
+export async function createBooking(booking) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .insert([{ ...booking }])
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("booking could not be created");
+  }
+
+  return data;
+}

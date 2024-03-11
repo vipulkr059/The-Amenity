@@ -11,7 +11,6 @@ const Img = styled.img`
 `;
 
 function Logo({ height }) {
-  console.log(height);
   const { isDarkMode } = useDarkMode();
   const src = isDarkMode
     ? "/logo-no-background.png"
