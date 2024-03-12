@@ -11,6 +11,7 @@ const CardContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
   max-height: 400px;
+  background-color: var(--color-grey-0);
 `;
 
 const CarouselContainer = styled.div`

@@ -5,6 +5,7 @@ import { useBookingByCabin } from "../features/bookings/useBookingByCabin";
 import Spinner from "../ui/Spinner";
 import { subtractDates } from "../utils/helpers";
 import { useCreateBooking } from "../features/bookings/useCreateBooking";
+import { useCabinById } from "../features/cabins/useCabinById";
 
 const Container = styled.div`
   display: flex;
@@ -79,9 +80,12 @@ function Reservation() {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
+  const { cabin } = useCabinById();
   const { bookedDates, isLoading } = useBookingByCabin();
   const { createBooking, isCreating } = useCreateBooking();
+
   if (isLoading || isCreating) return <Spinner />;
   console.log(bookedDates);
 
@@ -90,6 +94,8 @@ function Reservation() {
 
   const onSubmit = (data) => {
     const numNights = subtractDates(data.endDate, data.startDate);
+    const cabinPrice = cabin.regularPrice * numNights;
+    const extrasPrice = data.hasBreakfast ? 5 * numNights : 0;
     createBooking(
       {
         ...data,
@@ -97,9 +103,9 @@ function Reservation() {
         isPaid: false,
         guestId: 5,
         cabinId: id,
-        totalPrice: 250 * numNights,
-        cabinPrice: 250,
-        extrasPrice: 5 * numNights,
+        totalPrice: cabinPrice + extrasPrice - cabin.discount,
+        cabinPrice: cabinPrice,
+        extrasPrice: extrasPrice,
         status: "unconfirmed",
       },
       {
@@ -158,7 +164,11 @@ function Reservation() {
           <CheckboxInput type="checkbox" {...register("hasBreakfast")} />
           Include Breakfast
         </CheckboxLabel>
-        <Button type="submit">Book Now</Button>
+        <div>
+          <Button type="submit" size="large">
+            Book Now
+          </Button>
+        </div>
       </Form>
     </Container>
   );

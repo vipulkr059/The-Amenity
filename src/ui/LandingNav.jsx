@@ -11,7 +11,7 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: var(--color-grey-50);
+  background-color: var(--color-grey-0);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 

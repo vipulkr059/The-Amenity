@@ -139,3 +139,17 @@ export async function createCabin(newCabin, id) {
 
   return data;
 }
+
+export async function getCabinById(id) {
+  const { data, error } = await supabase
+    .from("cabins")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw new Error("Something wrong with cabin data");
+  }
+
+  return data;
+}
