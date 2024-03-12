@@ -22,7 +22,6 @@ export default function DashboardLayout() {
     numDays,
   } = useRecentStays();
   const { cabins, isLoading: isLoadingCabins } = useCabins();
-  console.log(bookings);
 
   if (isLoadingBookings || isLoadingStays || isLoadingCabins)
     return <Spinner />;

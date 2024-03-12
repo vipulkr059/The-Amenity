@@ -11,7 +11,7 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: var(--color-grey-0);
+  background-color: var(--color-grey-100);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -37,6 +37,9 @@ const LandingNav = () => {
       <Logo height="7rem" />
       <NavbarLinks>
         <NavbarLink>
+          <UserAvatar />
+        </NavbarLink>
+        <NavbarLink>
           <DarkModeToggle />
         </NavbarLink>
         {!user && (
@@ -45,7 +48,7 @@ const LandingNav = () => {
             <NavbarLink>Sign Up</NavbarLink>
           </>
         )}
-        <NavbarLink>{/* <UserAvatar /> */}</NavbarLink>
+
         <Logout />
       </NavbarLinks>
     </NavbarContainer>

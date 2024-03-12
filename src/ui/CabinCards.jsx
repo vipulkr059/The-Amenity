@@ -4,6 +4,7 @@ import { FaBed } from "react-icons/fa";
 import { MdDiscount } from "react-icons/md";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../features/authentication/useUser";
 
 const CardContainer = styled.div`
   position: relative;
@@ -37,12 +38,12 @@ const InfoContainer = styled.div`
 
 const Title = styled.h2`
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const Price = styled.p`
   margin: 5px 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bolder;
 `;
 const Discount = styled.p`
@@ -82,7 +83,8 @@ const images = [
 
 const CabinCard = ({ cabin }) => {
   const [index, setIndex] = useState(0);
-  const { id, name, description, image, regularPrice, maxCapacity, discount } =
+  const { user } = useUser();
+  const { id, name, description, images, regularPrice, maxCapacity, discount } =
     cabin;
 
   const navigate = useNavigate();
@@ -102,9 +104,9 @@ const CabinCard = ({ cabin }) => {
     <CardContainer>
       <CarouselContainer>
         <Carousel style={{ transform: `translateX(-${index * 100}%)` }}>
-          {/* {images.map((image, i) => ( */}
-          <Image src={image} />
-          {/* ))} */}
+          {images.map((image, i) => (
+            <Image key={i} src={image} alt={`Image ${i + 1}`} />
+          ))}
         </Carousel>
         <ButtonContainer>
           <Buttons onClick={prevSlide}>&#10094;</Buttons>
@@ -123,7 +125,13 @@ const CabinCard = ({ cabin }) => {
         <Capacity>
           <FaBed /> {maxCapacity}
         </Capacity>
-        <Button onClick={() => navigate(`/booking/${id}`)}>Book Now</Button>
+        <Button
+          onClick={() =>
+            user ? navigate(`/booking/${id}`) : navigate(`/login`)
+          }
+        >
+          Book Now
+        </Button>
       </InfoContainer>
     </CardContainer>
   );

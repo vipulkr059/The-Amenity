@@ -11,6 +11,5 @@ export function useUser() {
     user,
     isLoading,
     isAuthenticated: user?.role === "authenticated",
-    isReadOnly: user?.role === "supabase_read_only_user",
   };
 }

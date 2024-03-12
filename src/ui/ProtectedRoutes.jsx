@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
 
   // Load the authenticated user
-  const { user, isLoading, isAuthenticated, isReadOnly } = useUser();
+  const { user, isLoading, isAuthenticated } = useUser();
 
   //if there is no auth user , redirect
   useEffect(() => {
@@ -34,7 +34,7 @@ const ProtectedRoutes = ({ children }) => {
     );
 
   //if user render app
-  if (isAuthenticated || isReadOnly) return children;
+  if (isAuthenticated) return children;
 };
 
 export default ProtectedRoutes;
