@@ -46,6 +46,7 @@ export default function App() {
                 </UserProtectedRoutes>
               }
             >
+              <Route index element={<Navigate replace to="home" />} />
               <Route path="home" element={<LandingPage />} />
               <Route path="booking/:id" element={<Reservation />} />
             </Route>

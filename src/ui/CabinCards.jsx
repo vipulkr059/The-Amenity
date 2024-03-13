@@ -75,11 +75,6 @@ const Buttons = styled.button`
   outline: none;
   color: white;
 `;
-const images = [
-  "https://via.placeholder.com/300x200?text=Image1",
-  "https://via.placeholder.com/300x200?text=Image2",
-  "https://via.placeholder.com/300x200?text=Image3",
-];
 
 const CabinCard = ({ cabin }) => {
   const [index, setIndex] = useState(0);

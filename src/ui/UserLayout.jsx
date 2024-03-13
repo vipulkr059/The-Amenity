@@ -12,23 +12,28 @@ const StyledAppLayout = styled.div`
 
 const Main = styled.main`
   background-color: var(--color-grey-50);
+
+  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
-// const Container = styled.div`
-//   margin: 0 auto;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 3.2rem;
-// `;
+const Container = styled.div`
+  max-width: 120rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+`;
 
 function UserLayout() {
   return (
     <StyledAppLayout>
       <LandingNav />
-      <Main>
-        {/* <Container> */}
-        <Outlet />
-        {/* </Container> */}
-      </Main>
+      {/* <Main>
+        <Container> */}
+      <Outlet />
+      {/* </Container> */}
+      {/* </Main> */}
     </StyledAppLayout>
   );
 }
