@@ -12,7 +12,7 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-const ProtectedRoutes = ({ children }) => {
+const AdminProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
 
   // Load the authenticated user
@@ -32,9 +32,9 @@ const ProtectedRoutes = ({ children }) => {
         <Spinner />
       </FullPage>
     );
-
+  const isAdmin = user.user_metadata.isAdmin;
   //if user render app
-  if (isAuthenticated) return children;
+  if (isAuthenticated && isAdmin) return children;
 };
 
-export default ProtectedRoutes;
+export default AdminProtectedRoutes;

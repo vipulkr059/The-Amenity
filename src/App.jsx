@@ -15,10 +15,14 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { Booking } from "./pages/Booking";
 import { CheckIn } from "./pages/CheckIn";
-import ProtectedRoutes from "./ui/ProtectedRoutes";
+import AdminProtectedRoutes from "./ui/AdminProtectedRoutes";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { LandingPage } from "./pages/LandingPage";
 import Reservation from "./pages/Reservation";
+import SignupForm from "./pages/SignUp";
+import UserProtectedRoutes from "./ui/UserProtectedRoutes";
+import UserLayout from "./ui/UserLayout";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -35,14 +39,21 @@ export default function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="home" element={<LandingPage />} />
-            <Route path="booking/:id" element={<Reservation />} />
-
             <Route
               element={
-                <ProtectedRoutes>
+                <UserProtectedRoutes>
+                  <UserLayout />
+                </UserProtectedRoutes>
+              }
+            >
+              <Route path="home" element={<LandingPage />} />
+              <Route path="booking/:id" element={<Reservation />} />
+            </Route>
+            <Route
+              element={
+                <AdminProtectedRoutes>
                   <AppLayout />
-                </ProtectedRoutes>
+                </AdminProtectedRoutes>
               }
             >
               <Route index element={<Navigate replace to="dashboard" />} />
@@ -56,6 +67,7 @@ export default function App() {
               <Route path="account" element={<Account />} />
             </Route>
             <Route path="login" element={<Login />} />
+            <Route path="signup" element={<SignupForm />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

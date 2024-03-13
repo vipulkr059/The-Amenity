@@ -22,7 +22,7 @@ export const LandingPage = () => {
   if (isLoading) return <Spinner />;
   return (
     <LandingLayout>
-      <LandingNav />
+      {/* <LandingNav /> */}
       <CardContainer>
         {cabins.map((cabin) => {
           return <CabinCard key={cabin.id} cabin={cabin} />;
