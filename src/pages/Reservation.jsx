@@ -1,177 +1,121 @@
+import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useBookingByCabin } from "../features/bookings/useBookingByCabin";
-import Spinner from "../ui/Spinner";
-import { subtractDates } from "../utils/helpers";
-import { useCreateBooking } from "../features/bookings/useCreateBooking";
+import ImageGrid from "../ui/ImageGrid";
+import BookingForm from "../ui/BookingForm";
 import { useCabinById } from "../features/cabins/useCabinById";
+import Spinner from "../ui/Spinner";
+import { CabinDetails } from "../ui/CabinDetails";
 
+// Styled Components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--color-grey-50);
 `;
 
-const Form = styled.form`
-  width: 400px;
-  padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const Label = styled.label`
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #333;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-
-  &:focus {
-    border-color: #007bff;
+const InfoSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-grey-0);
+  border-radius: 15px;
+  margin: 80px;
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack images vertically on smaller devices */
+    margin: 20px; /* Adjust margin */
   }
 `;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+const InfoLeft = styled.div`
+  flex: 1;
+  max-height: 600px; /* Set a maximum height to enable scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-left: 20px;
+  overflow-y: scroll; /* Show scrollbar only when needed */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
 
-  &:hover {
-    background-color: #0056b3;
+  @media (max-width: 768px) {
+    max-height: none; /* Remove maximum height on smaller devices */
+    margin-left: 0; /* Reset margin */
+    margin-bottom: 20px; /* Add some bottom margin for better spacing */
   }
 `;
 
-const CheckboxLabel = styled.label`
-  font-size: 16px;
-  color: #333;
+const InfoRight = styled.div`
+  flex: 1;
+  margin-left: 20px;
+  position: sticky;
+  top: 0; /* Stick to the top */
+
+  @media (max-width: 768px) {
+    margin-left: 0; /* Reset margin */
+    margin-bottom: 20px; /* Add some bottom margin for better spacing */
+  }
 `;
 
-const CheckboxInput = styled.input`
-  margin-right: 8px;
+const ImagesContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 80px;
+  width: 70%;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack images vertically on smaller devices */
+    margin: 20px; /* Adjust margin */
+  }
 `;
 
-const ErrorMessage = styled.p`
-  margin-top: -10px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: red;
+const MainImage = styled.img`
+  width: 50%;
+  border-radius: 15px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: none; /* Remove max-width on smaller devices */
+    height: auto; /* Ensure image maintains aspect ratio */
+  }
 `;
 
-function Reservation() {
-  const { id } = useParams();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    reset,
-  } = useForm();
-  const { cabin } = useCabinById();
-  const { bookedDates, isLoading } = useBookingByCabin();
-  const { createBooking, isCreating } = useCreateBooking();
+const Reservation = () => {
+  const { cabin, isLoading } = useCabinById();
+  if (isLoading) return <Spinner />;
+  const { images } = cabin;
 
-  if (isLoading || isCreating) return <Spinner />;
-  console.log(bookedDates);
-
-  const startDates = bookedDates.map((date) => date.startDate.substring(0, 10));
-  const endDates = bookedDates.map((date) => date.endDate.substring(0, 10));
-
-  const onSubmit = (data) => {
-    const numNights = subtractDates(data.endDate, data.startDate);
-    const cabinPrice = cabin.regularPrice * numNights;
-    const extrasPrice = data.hasBreakfast ? 5 * numNights : 0;
-    createBooking(
-      {
-        ...data,
-        numNights: numNights,
-        isPaid: false,
-        guestId: 5,
-        cabinId: id,
-        totalPrice: cabinPrice + extrasPrice - cabin.discount,
-        cabinPrice: cabinPrice,
-        extrasPrice: extrasPrice,
-        status: "unconfirmed",
-      },
-      {
-        onSuccess: (data) => {
-          reset();
-        },
-      }
-    );
-  };
-
-  const isDateBooked = (date) => {
-    console.log(date);
-    return startDates.includes(date) || endDates.includes(date);
-  };
+  const mainImage = images[0]; // First image is the main image
 
   return (
     <Container>
-      <h1 style={{ marginBottom: "20px" }}>Booking for Hotel {id}</h1>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label>Check-In Date</Label>
-        <Input
-          type="date"
-          {...register("startDate", { required: true })}
-          min={new Date().toISOString()[0]} // Prevent selecting past dates
-          max={watch("endDate") || undefined} // Maximum date is the check-out date if specified
-          disabled={watch("endDate") && isDateBooked(watch("endDate"))} // Disable the date if already booked
-        />
-        {errors.startDate && (
-          <ErrorMessage>This field is required.</ErrorMessage>
-        )}
-        <Label>Check-Out Date</Label>
-        <Input
-          type="date"
-          {...register("endDate", { required: true })}
-          min={watch("startDate") || new Date().toISOString().split("T")[0]} // Minimum date is the check-in date if specified
-          disabled={watch("startDate") && isDateBooked(watch("startDate"))} // Disable the date if already booked
-        />
-        {errors.endDate && <ErrorMessage>This field is required.</ErrorMessage>}
-        <Label>Number Of Guests</Label>
-        <Input
-          type="number"
-          {...register("numGuests", {
-            required: "This field is required",
-            min: {
-              value: 1,
-              message: "Number of guests should be more than 1",
-            },
-          })}
+      <ImagesContainer>
+        {/* Main image */}
+        <MainImage src={mainImage} alt="Main" />
 
-          // Minimum 1 guest req
-        />
-        {errors.numGuests && (
-          <ErrorMessage>{errors.numGuests.message}</ErrorMessage>
-        )}
-        <CheckboxLabel>
-          <CheckboxInput type="checkbox" {...register("hasBreakfast")} />
-          Include Breakfast
-        </CheckboxLabel>
-        <div>
-          <Button type="submit" size="large">
-            Book Now
-          </Button>
-        </div>
-      </Form>
+        {/* Small images */}
+        <ImageGrid images={images} />
+      </ImagesContainer>
+      <InfoSection>
+        <InfoLeft>
+          {/* <h2 >Hotel Information</h2>
+          <p>Hotel Name: {name}</p>
+          <p>Location: City, Country</p>
+          <p>
+            {description}
+            {description}
+            {description}
+            {description}
+          </p> */}
+          <CabinDetails cabin={cabin} />
+        </InfoLeft>
+        <InfoRight>
+          <BookingForm />
+        </InfoRight>
+      </InfoSection>
     </Container>
   );
-}
+};
 
 export default Reservation;

@@ -11,10 +11,13 @@ const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: var(--color-grey-50);
-  box-shadow: var(--color-grey-200) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 10px 20px;
+  background-color: var(--color-grey-0);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+  }
 `;
 
 const NavbarLinks = styled.ul`
@@ -23,17 +26,40 @@ const NavbarLinks = styled.ul`
   align-items: center;
   margin: 0;
   padding: 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
 `;
-const LogoContainer = styled.ul``;
+
+const LogoContainer = styled.div`
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+`;
 
 const NavbarLink = styled.li`
   margin-right: 25px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+
+  &:hover {
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
 `;
 
 const LandingNav = () => {
   const { user } = useUser();
-  console.log(user);
   const navigate = useNavigate();
+
   return (
     <NavbarContainer>
       <LogoContainer onClick={() => navigate("/home")}>
@@ -41,7 +67,16 @@ const LandingNav = () => {
       </LogoContainer>
 
       <NavbarLinks>
-        {user.user_metadata.isAdmin && <NavbarLink>Dashboard</NavbarLink>}
+        <NavbarLink onClick={() => navigate("/home")}>Home</NavbarLink>
+        <NavbarLink onClick={() => navigate("/home")}>Explore</NavbarLink>
+        {user.user_metadata.isAdmin && (
+          <NavbarLink onClick={() => navigate("/dashboard")}>
+            Dashboard
+          </NavbarLink>
+        )}
+      </NavbarLinks>
+
+      <NavbarLinks>
         <NavbarLink>
           <UserAvatar />
         </NavbarLink>
@@ -54,8 +89,9 @@ const LandingNav = () => {
             <NavbarLink>Sign Up</NavbarLink>
           </>
         )}
-
-        <Logout />
+        <NavbarLink>
+          <Logout />
+        </NavbarLink>
       </NavbarLinks>
     </NavbarContainer>
   );

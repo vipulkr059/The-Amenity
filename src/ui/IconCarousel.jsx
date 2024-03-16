@@ -8,13 +8,13 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  width: 70%;
-  flex: 70;
+  /* width: 100%; */
+  flex: 60;
   background-color: var(--color-grey-50);
 `;
 
 const StoryContainer = styled.div`
-  width: 90%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;

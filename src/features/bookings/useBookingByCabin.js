@@ -3,7 +3,6 @@ import { getBookingByCabinId } from "../../services/apiBookings";
 import { useParams } from "react-router-dom";
 export function useBookingByCabin() {
   const { id: cabinId } = useParams();
-  console.log(cabinId);
   const {
     isLoading,
     data: bookedDates,

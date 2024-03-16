@@ -8,11 +8,11 @@ import { useUser } from "../features/authentication/useUser";
 
 const CardContainer = styled.div`
   position: relative;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  /* border: 1px solid #ccc; */
+  border-radius: 10px;
   overflow: hidden;
   max-height: 400px;
-  background-color: var(--color-grey-0);
+  background-color: var(--color-grey-50);
 `;
 
 const CarouselContainer = styled.div`
