@@ -58,12 +58,36 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
+      <FormRow label="Location" error={errors?.location?.message}>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="location"
+          {...register("location", { required: "This field is required" })}
+        />
+      </FormRow>
+
       <FormRow label="Maximum Capacity" error={errors?.maxCapacity?.message}>
         <Input
           disabled={isLoading}
           type="number"
           id="maxCapacity"
           {...register("maxCapacity", {
+            required: "This field is required",
+            min: {
+              value: 1,
+              message: "Capacity should be more than 1",
+            },
+          })}
+        />
+      </FormRow>
+
+      <FormRow label="Bedrooms" error={errors?.bedrooms?.message}>
+        <Input
+          disabled={isLoading}
+          type="number"
+          id="bedrooms"
+          {...register("bedrooms", {
             required: "This field is required",
             min: {
               value: 1,
@@ -103,10 +127,20 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
+      <FormRow label="Category" error={errors?.category?.message}>
+        <Input
+          disabled={isLoading}
+          type="text"
+          id="category"
+          defaultValue=""
+          {...register("category", { required: "This field is required" })}
+        />
+      </FormRow>
+
       <FormRow label="Description" error={errors?.description?.message}>
         <Textarea
           disabled={isLoading}
-          type="number"
+          type="text"
           id="description"
           defaultValue=""
           {...register("description", { required: "This field is required" })}

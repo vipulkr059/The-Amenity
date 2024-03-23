@@ -25,15 +25,22 @@ const LandingLayout = styled.div`
 
 const CarouselContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
   box-shadow: var(--color-grey-200) 0px 3px 3px 0px;
   background-color: var(--color-grey-50);
   padding: 20px;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 const CarouselContent = styled.div`
   flex: 1;
+  min-width: 0; /* Ensure flex items can shrink */
 `;
 
 export const LandingPage = () => {
@@ -61,14 +68,14 @@ export const LandingPage = () => {
     <LandingLayout>
       <CarouselContainer>
         <CarouselContent>
-          <IconCarousel />
-        </CarouselContent>
-        <CarouselContent>
           <CabinTableOperations />
         </CarouselContent>
+        {/* <CarouselContent>
+          <IconCarousel />
+        </CarouselContent> */}
       </CarouselContainer>
       <CardContainer>
-        {filteredCabins.map((cabin) => {
+        {sortedCabins.map((cabin) => {
           return <CabinCard key={cabin.id} cabin={cabin} />;
         })}
       </CardContainer>

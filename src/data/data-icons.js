@@ -20,16 +20,16 @@ import { LuFlower2 } from "react-icons/lu";
 import { MdBrunchDining } from "react-icons/md";
 
 export const icons = [
-  MdCabin,
-  FaUmbrellaBeach,
-  FaMountain,
-  FaHotel,
-  MdHomeWork,
-  GiIsland,
-  GiTreehouse,
-  FaSwimmingPool,
-  GiForestCamp,
-  MdBedroomParent,
+  { label: "Cabin", icon: MdCabin },
+  { label: "Beach", icon: FaUmbrellaBeach },
+  { label: "Mountain", icon: FaMountain },
+  { label: "Hotel", icon: FaHotel },
+  { label: "Motel", icon: MdHomeWork },
+  { label: "Island", icon: GiIsland },
+  { label: "TreeHouse", icon: GiTreehouse },
+  { label: "Pool", icon: FaSwimmingPool },
+  { label: "Camping", icon: GiForestCamp },
+  { label: "Rooms", icon: MdBedroomParent },
 ];
 
 export const amenites = [

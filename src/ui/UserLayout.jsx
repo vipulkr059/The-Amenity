@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import styled from "styled-components";
 import LandingNav from "./LandingNav";
+import MobileNavbar from "./MobileNav";
 
 const StyledAppLayout = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ function UserLayout() {
   return (
     <StyledAppLayout>
       <LandingNav />
+      <MobileNavbar />
       {/* <Main>
         <Container> */}
       <Outlet />

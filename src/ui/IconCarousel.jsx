@@ -8,13 +8,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  /* width: 100%; */
-  flex: 60;
-  background-color: var(--color-grey-50);
+  width: 100%;
 `;
 
 const StoryContainer = styled.div`
-  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,10 +23,6 @@ const IconWrapper = styled.div`
   font-size: 3rem;
   margin: 0 10px;
   transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 const Carousel = () => {
@@ -63,7 +56,7 @@ const Carousel = () => {
               })`,
             }}
           >
-            <IconComponent />
+            <IconComponent.icon />
           </IconWrapper>
         ))}
       </StoryContainer>

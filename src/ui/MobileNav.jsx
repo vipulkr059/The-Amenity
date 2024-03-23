@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import UserAvatar from "../features/authentication/UserAvatar";
 import Logo from "./Logo";
@@ -6,6 +6,7 @@ import DarkModeToggle from "./DarkModeToggle";
 import { useUser } from "../features/authentication/useUser";
 import { Logout } from "../features/authentication/Logout";
 import { useNavigate } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 
 const NavbarContainer = styled.div`
   display: flex;
@@ -13,8 +14,11 @@ const NavbarContainer = styled.div`
   align-items: center;
   padding: 10px 20px;
   background-color: var(--color-grey-0);
+  position: relative;
+  height: 7rem;
 
-  @media (max-width: 768px) {
+  @media (min-width: 769px) {
+    /* Hide the mobile navbar container on larger screens */
     display: none;
   }
 `;
@@ -23,20 +27,25 @@ const NavbarLinks = styled.ul`
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   margin: 0;
   padding: 0;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-  }
+  flex-direction: column;
+  background-color: var(--color-grey-0);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100vw;
+  transition: transform 0.3s ease;
+  transform: ${({ isOpen }) =>
+    isOpen ? "translateX(0)" : "translateX(-100%)"};
 `;
 
 const LogoContainer = styled.div`
-  @media (max-width: 768px) {
-    margin-bottom: 20px;
-  }
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
 `;
 
 const NavbarLink = styled.li`
@@ -44,28 +53,40 @@ const NavbarLink = styled.li`
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   font-size: large;
+  z-index: 2;
 
   &:hover {
     font-weight: bold;
   }
+`;
+
+const MenuIcon = styled(FaBars)`
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 
   @media (max-width: 768px) {
-    margin-right: 0;
-    margin-bottom: 15px;
+    display: block;
   }
 `;
 
-const LandingNav = () => {
+const MobileNavbar = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <NavbarContainer>
-      <LogoContainer onClick={() => navigate("/home")}>
-        <Logo height="7rem" />
+      <MenuIcon onClick={toggleMenu} />
+      <LogoContainer>
+        <Logo height="5rem" />
       </LogoContainer>
 
-      <NavbarLinks>
+      <NavbarLinks isOpen={isOpen}>
         <NavbarLink onClick={() => navigate("/home")}>Home</NavbarLink>
         <NavbarLink onClick={() => navigate("/home")}>Explore</NavbarLink>
         {user.user_metadata.isAdmin && (
@@ -73,9 +94,7 @@ const LandingNav = () => {
             Dashboard
           </NavbarLink>
         )}
-      </NavbarLinks>
 
-      <NavbarLinks>
         <NavbarLink>
           <UserAvatar />
         </NavbarLink>
@@ -96,4 +115,4 @@ const LandingNav = () => {
   );
 };
 
-export default LandingNav;
+export default MobileNavbar;

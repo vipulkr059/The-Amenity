@@ -7,6 +7,8 @@ import { subtractDates } from "../utils/helpers";
 import { useCreateBooking } from "../features/bookings/useCreateBooking";
 import { useCabinById } from "../features/cabins/useCabinById";
 import { useEffect, useState } from "react";
+import { useGuestByEmail } from "../features/guest/useGuestByEmail";
+import { useUser } from "../features/authentication/useUser";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +33,7 @@ const Form = styled.form`
 
 const Label = styled.label`
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const Input = styled.input`
@@ -40,7 +42,7 @@ const Input = styled.input`
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
 
   &:focus {
@@ -79,6 +81,11 @@ const ErrorMessage = styled.p`
   color: red;
 `;
 
+const Calculated = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 function BookingForm() {
   const [numNights, setNumNights] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -93,6 +100,9 @@ function BookingForm() {
   const { cabin } = useCabinById();
   const { bookedDates, isLoading } = useBookingByCabin();
   const { createBooking, isCreating } = useCreateBooking();
+  const { user } = useUser();
+  const { guest } = useGuestByEmail(user.email);
+
   useEffect(() => {
     if (watch("startDate") && watch("endDate")) {
       const nights = subtractDates(watch("endDate"), watch("startDate"));
@@ -100,11 +110,16 @@ function BookingForm() {
       const stayCharge = nights * cabin.regularPrice;
       const additionals = 5 * watch("numGuests");
 
-      setTotalPrice(() =>
-        watch("hasBreakfast") ? stayCharge + additionals : stayCharge
-      );
+      setTotalPrice(stayCharge + additionals);
     }
-  }, [watch("startDate"), watch("endDate"), watch("numGuest")]);
+  }, [
+    watch("startDate"),
+    watch("endDate"),
+    watch("numGuests"),
+    watch("hasBreakfast"),
+    totalPrice,
+    numNights,
+  ]);
 
   if (isLoading || isCreating) return <Spinner />;
 
@@ -121,7 +136,7 @@ function BookingForm() {
         ...data,
         numNights: numNights,
         isPaid: false,
-        guestId: 5,
+        guestId: guest.id,
         cabinId: id,
         totalPrice: cabinPrice + extrasPrice - cabin.discount,
         cabinPrice: cabinPrice,
@@ -131,6 +146,8 @@ function BookingForm() {
       {
         onSuccess: (data) => {
           reset();
+          numNights = 0;
+          totalPrice = 0;
         },
       }
     );
@@ -164,6 +181,7 @@ function BookingForm() {
         {errors.endDate && <ErrorMessage>This field is required.</ErrorMessage>}
         <Label>Number Of Guests</Label>
         <Input
+          min="0"
           type="number"
           {...register("numGuests", {
             required: "This field is required",
@@ -188,21 +206,36 @@ function BookingForm() {
 
         <br />
         <br />
-        <Label>
-          &#36;{cabin.regularPrice} x {numNights} nights = &#36;
-          {cabin.regularPrice * numNights}
-        </Label>
+
+        <Calculated>
+          <Label>
+            &#36;{cabin.regularPrice} x {numNights} nights
+          </Label>
+          <Label>
+            &#36;
+            {cabin.regularPrice * numNights}
+          </Label>
+        </Calculated>
+
+        <Calculated className="line">
+          {watch("hasBreakfast") && (
+            <>
+              <Label>
+                BreakFast: &#36;{5} x {watch("numGuests")} guests
+              </Label>
+              <Label>
+                &#36;
+                {5 * watch("numGuests")}
+              </Label>
+            </>
+          )}
+        </Calculated>
         <br />
-        <br />
-        <Label>
-          BreakFast: &#36;{5} x {watch("numGuests")} guests = &#36;
-          {5 * watch("numGuests")}
-        </Label>
-        <br />
-        <br />
-        <Label>Total Price : &#36;{totalPrice}</Label>
-        <br />
-        <br />
+        <Calculated>
+          <Label>Total Price :</Label>
+          <Label> &#36;{totalPrice}</Label>
+        </Calculated>
+
         <div>
           <Button type="submit" size="large">
             Book Now

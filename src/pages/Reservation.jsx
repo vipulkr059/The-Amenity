@@ -29,7 +29,7 @@ const InfoSection = styled.div`
 
 const InfoLeft = styled.div`
   flex: 1;
-  max-height: 600px; /* Set a maximum height to enable scrolling */
+  max-height: 650px; /* Set a maximum height to enable scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
   margin-left: 20px;
   overflow-y: scroll; /* Show scrollbar only when needed */
