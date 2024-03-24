@@ -9,25 +9,28 @@ import { useUser } from "../features/authentication/useUser";
 const CardContainer = styled.div`
   position: relative;
   /* border: 1px solid #ccc; */
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
-  max-height: 400px;
-  background-color: var(--color-grey-50);
+  max-height: 500px;
+  background-color: var(--color-grey-0);
 `;
 
 const CarouselContainer = styled.div`
   position: relative;
   overflow: hidden;
-  height: 200px; /* Adjust height of carousel as needed */
+  height: 300px; /* Adjust height of carousel as needed */
+  border-radius: 15px;
 `;
 
 const Carousel = styled.div`
   display: flex;
   transition: transform 0.5s ease;
+  height: 100%;
 `;
 
 const Image = styled.img`
   width: 100%;
+  height: auto;
   display: block;
   object-fit: cover;
 `;

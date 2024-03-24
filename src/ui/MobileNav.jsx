@@ -16,6 +16,7 @@ const NavbarContainer = styled.div`
   background-color: var(--color-grey-0);
   position: relative;
   height: 7rem;
+  z-index: 2;
 
   @media (min-width: 769px) {
     /* Hide the mobile navbar container on larger screens */
@@ -53,7 +54,6 @@ const NavbarLink = styled.li`
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   font-size: large;
-  z-index: 2;
 
   &:hover {
     font-weight: bold;

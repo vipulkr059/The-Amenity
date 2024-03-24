@@ -76,7 +76,7 @@ const LandingNav = () => {
       </NavbarLinks>
 
       <NavbarLinks>
-        <NavbarLink>
+        <NavbarLink onClick={() => navigate("/profile")}>
           <UserAvatar />
         </NavbarLink>
         <NavbarLink>

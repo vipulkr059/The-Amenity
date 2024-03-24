@@ -146,8 +146,8 @@ function BookingForm() {
       {
         onSuccess: (data) => {
           reset();
-          numNights = 0;
-          totalPrice = 0;
+          setNumNights(0);
+          setTotalPrice(0);
         },
       }
     );

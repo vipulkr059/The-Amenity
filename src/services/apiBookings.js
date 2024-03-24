@@ -154,3 +154,17 @@ export async function createBooking(booking) {
 
   return data;
 }
+
+export async function getBookingByGuestId(id) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("guestId", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking not found for this guest");
+  }
+
+  return data;
+}

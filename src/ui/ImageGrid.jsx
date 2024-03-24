@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Modal from "./Modal";
+import { cabins } from "../data/data-cabins";
+import CreateCabinForm from "../features/cabins/CreateCabinForm";
+import OpenImage from "./ImageModal";
 
 // Styled Components
 const GridContainer = styled.div`
@@ -17,15 +21,29 @@ const GridItem = styled.img`
 
 // ImageGrid Component
 const ImageGrid = ({ images }) => {
-  console.log(images);
   return (
     <GridContainer>
-      {images.slice(0, 2).map((image, index) => (
-        <GridItem key={index} src={image} alt={`Image ${index + 1}`} />
-      ))}
-      {images.slice(0, 2).map((image, index) => (
-        <GridItem key={index + 2} src={image} alt={`Image ${index + 3}`} />
-      ))}
+      <Modal>
+        {images.slice(0, 2).map((image, index) => (
+          <>
+            {/* <Modal.Open opens="cabin-image"> */}
+            <GridItem
+              key={index}
+              src={image}
+              alt={`Image ${index + 1}`}
+              onClick={<OpenImage imageUrl={image} />}
+            />
+            {/* </Modal.Open>
+            <Modal.Window name="cabin-image">
+              <OpenImage imageUrl={image} />
+            </Modal.Window> */}
+          </>
+        ))}
+
+        {images.slice(0, 2).map((image, index) => (
+          <GridItem key={index + 2} src={image} alt={`Image ${index + 3}`} />
+        ))}
+      </Modal>
     </GridContainer>
   );
 };

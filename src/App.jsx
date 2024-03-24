@@ -22,6 +22,7 @@ import Reservation from "./pages/Reservation";
 import SignupForm from "./pages/SignUp";
 import UserProtectedRoutes from "./ui/UserProtectedRoutes";
 import UserLayout from "./ui/UserLayout";
+import UserProfile from "./pages/UserProfile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,6 +50,7 @@ export default function App() {
               <Route index element={<Navigate replace to="home" />} />
               <Route path="home" element={<LandingPage />} />
               <Route path="booking/:id" element={<Reservation />} />
+              <Route path="profile" element={<UserProfile />} />
             </Route>
             <Route
               element={
