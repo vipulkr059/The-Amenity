@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FaBed } from "react-icons/fa";
+import { FaBed, FaUser, FaUsers } from "react-icons/fa";
 import { MdDiscount } from "react-icons/md";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../features/authentication/useUser";
+import { max } from "date-fns";
 
 const CardContainer = styled.div`
   position: relative;
@@ -36,12 +37,12 @@ const Image = styled.img`
 `;
 
 const InfoContainer = styled.div`
-  padding: 10px;
+  padding: 15px;
 `;
 
 const Title = styled.h2`
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 const Price = styled.p`
@@ -55,6 +56,8 @@ const Discount = styled.p`
   color: green;
 `;
 const Capacity = styled.p`
+  display: flex;
+  justify-content: space-between;
   margin: 5px 0;
   font-size: 14px;
   font-weight: bolder;
@@ -82,8 +85,16 @@ const Buttons = styled.button`
 const CabinCard = ({ cabin }) => {
   const [index, setIndex] = useState(0);
   const { user } = useUser();
-  const { id, name, description, images, regularPrice, maxCapacity, discount } =
-    cabin;
+  const {
+    id,
+    description,
+    images,
+    regularPrice,
+    maxCapacity,
+    discount,
+    location,
+    bedrooms,
+  } = cabin;
 
   const navigate = useNavigate();
   const nextSlide = () => {
@@ -112,7 +123,7 @@ const CabinCard = ({ cabin }) => {
         </ButtonContainer>
       </CarouselContainer>
       <InfoContainer>
-        <Title>{name}</Title>
+        <Title>{location}</Title>
         <Price>
           &#36;{regularPrice}{" "}
           <span style={{ fontSize: "14px", fontWeight: "normal" }}>night</span>
@@ -121,7 +132,12 @@ const CabinCard = ({ cabin }) => {
           <MdDiscount /> -&#36;{discount}
         </Discount>
         <Capacity>
-          <FaBed /> {maxCapacity}
+          <span>
+            <FaBed /> {bedrooms}
+          </span>
+          <span>
+            <FaUsers /> {maxCapacity}
+          </span>
         </Capacity>
         <Button
           onClick={() =>

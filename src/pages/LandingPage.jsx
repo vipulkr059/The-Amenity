@@ -48,6 +48,7 @@ export const LandingPage = () => {
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
   const filterValue = searchParams.get("discount") || "all";
+  const categoryFilter = searchParams.get("category") || "all";
 
   let filteredCabins;
   if (filterValue === "all") filteredCabins = cabins;
@@ -60,9 +61,19 @@ export const LandingPage = () => {
   const sortBy = searchParams.get("sortBy") || "startDate-asc";
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
-  const sortedCabins = filteredCabins.sort(
+  let sortedCabins = filteredCabins.sort(
     (a, b) => (a[field] - b[field]) * modifier
   );
+
+  //3) Category Filter
+
+  if (categoryFilter === "all") sortedCabins = sortedCabins;
+  if (categoryFilter === "Cabin")
+    sortedCabins = sortedCabins.filter((cabin) => cabin.category === "cabin");
+  if (categoryFilter === "Mountain")
+    sortedCabins = sortedCabins.filter(
+      (cabin) => cabin.category === "mountain"
+    );
 
   return (
     <LandingLayout>
@@ -70,9 +81,9 @@ export const LandingPage = () => {
         <CarouselContent>
           <CabinTableOperations />
         </CarouselContent>
-        {/* <CarouselContent>
+        <CarouselContent>
           <IconCarousel />
-        </CarouselContent> */}
+        </CarouselContent>
       </CarouselContainer>
       <CardContainer>
         {sortedCabins.map((cabin) => {
