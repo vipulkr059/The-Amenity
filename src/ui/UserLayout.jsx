@@ -4,6 +4,7 @@ import Header from "./Header";
 import styled from "styled-components";
 import LandingNav from "./LandingNav";
 import MobileNavbar from "./MobileNav";
+import Footer from "./Footer";
 
 const StyledAppLayout = styled.div`
   display: flex;
