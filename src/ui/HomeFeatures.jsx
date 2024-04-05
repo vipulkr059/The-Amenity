@@ -9,6 +9,12 @@ const Container = styled.div`
   gap: 2rem;
   padding: 25px;
   background-color: var(--color-grey-50);
+  color: #fff;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
 `;
 
 const LeftSide = styled.div`
@@ -33,8 +39,18 @@ const SmallCard = styled.div`
   height: 250px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
   padding: 20px;
+  background-image: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url(${(props) => props.imageUrl});
+  background-size: cover;
+  background-position: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `;
 
 const BigCard = styled.div`
@@ -44,15 +60,28 @@ const BigCard = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 508px;
-  background-color: rgba(255, 255, 255, 0.8);
+
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  background-image: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url("/bigcard.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `;
 
 const Title = styled.h2`
   margin-bottom: 20px;
   text-align: left;
+  @media (max-width: 768px) {
+    font-size: larger;
+  }
 `;
 
 const Description = styled.p`
@@ -60,32 +89,15 @@ const Description = styled.p`
   text-align: left;
 `;
 
-const Discount = styled.p`
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: left;
-`;
-
-const Terms = styled.p`
-  font-size: 0.9rem;
-  margin-top: auto;
-  text-align: left;
-`;
-
-const CouponCode = styled.p`
-  font-weight: bold;
-  text-align: left;
-`;
-
 function HomeFeatures() {
   return (
     <Container>
       <LeftSide>
-        <SmallCard>
+        <SmallCard imageUrl={"/small1.jpg"}>
           <Title>Explore more to get your comfort zone</Title>
           <Description>Book your perfect stay with us.</Description>
         </SmallCard>
-        <SmallCard>
+        <SmallCard imageUrl={"/small2.jpg"}>
           <Description>Hotel Available</Description>
           <Title>1000+</Title>
         </SmallCard>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TbDiscount2 } from "react-icons/tb";
 
 const Container = styled.div`
   display: flex;
@@ -7,6 +8,12 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   background-color: var(--color-grey-50);
+  color: #fff;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 25px;
+    height: auto;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -46,7 +53,7 @@ const Discount = styled.p`
 
 const Terms = styled.p`
   font-size: 0.9rem;
-  margin-top: auto; /* Aligns terms at the bottom */
+  bottom: 10px;
   text-align: left;
 `;
 
@@ -55,15 +62,33 @@ const CouponCode = styled.p`
 `;
 
 const Card1 = styled(Card)`
-  background-image: url("/HomePage.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-image: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.65) 100%
+    ),
+    url("/promo1.jpg");
   background-size: cover;
   background-position: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const Card2 = styled(Card)`
-  background-image: url("/HomePage.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-image: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.65) 100%
+    ),
+    url("/promo2.jpg");
   background-size: cover;
   background-position: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 function PromoCards() {
@@ -71,24 +96,25 @@ function PromoCards() {
     <Container>
       <CardWrapper>
         <Card1>
-          <Title>Promo Card 1</Title>
-          <Description>This is the first promo card.</Description>
+          <Title>
+            <TbDiscount2 />
+          </Title>
           <Discount>Get 20% off on your next purchase!</Discount>
-
           <CouponCode>Coupon code: PROMO20</CouponCode>
           <Terms>
-            Terms and conditions apply. Offer valid for a limited time.
+            *Terms and conditions apply. Offer valid for a limited time.
           </Terms>
         </Card1>
       </CardWrapper>
       <CardWrapper>
         <Card2>
-          <Title>Promo Card 2</Title>
-          <Description>This is the second promo card.</Description>
+          <Title>
+            <TbDiscount2 />
+          </Title>
           <Discount>Get 30% off on all items!</Discount>
           <CouponCode>Coupon code: APRIL30</CouponCode>
           <Terms>
-            Terms and conditions apply. Offer valid till end of the month.
+            *Terms and conditions apply. Offer valid till end of the month.
           </Terms>
         </Card2>
       </CardWrapper>

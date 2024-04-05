@@ -4,7 +4,7 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 80vh;
-  padding-top: 56.25%; 
+  padding-top: 56.25%;
   overflow: hidden;
   background-color: var(--color-grey-50);
 `;
@@ -35,7 +35,7 @@ const Heading = styled.h2`
   bottom: 20px;
   left: 50px;
   color: white;
-  font-size: 8rem;
+  font-size: 5vw;
 `;
 
 export default function HomeImage() {

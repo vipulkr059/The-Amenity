@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const FooterContainer = styled.footer`
   background-color: var(--color-indigo-700);
-  color: #fff;
+  color: var(--color-grey-100);
   padding: 20px;
   text-align: center;
 `;
@@ -18,7 +18,6 @@ const FooterLinks = styled.div`
 const FooterLink = styled.a`
   margin: 0 10px;
   text-decoration: none;
-  color: #fff;
 `;
 
 const Footer = () => {

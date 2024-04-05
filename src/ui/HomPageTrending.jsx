@@ -19,76 +19,93 @@ const Column = styled.div`
 
 const Title = styled.h2`
   font-size: 3rem;
-  margin-left: 50px;
 `;
 
 const Subtitle = styled.h3`
   font-size: 1.5rem;
-  margin-left: 50px;
-  color: #666;
+  color: var(--color-grey-500);
+`;
+
+const Headings = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-left: 50px;
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
 `;
 
 function HomPageTrending() {
   return (
     <Container>
-      <Title>Discover your destination</Title>
-      <Subtitle>
-        Expolore our range of property types for every traveler's prefrence
-      </Subtitle>
+      <Headings>
+        {" "}
+        <Title>Discover your destination</Title>
+        <Subtitle>
+          Expolore our range of property types for every traveler's prefrence
+        </Subtitle>
+      </Headings>
       <Column>
         <Card
           height="150px"
-          imageUrl="https://via.placeholder.com/250"
+          imageUrl="/villas.jpg"
           title="Villas"
           subtitle="10,804"
         />
         <Card
           height="150px"
-          imageUrl="https://via.placeholder.com/250"
+          imageUrl="/cabin.jpg"
           title="Cabins"
           subtitle="12,458"
         />
         <Card
           height="150px"
-          imageUrl="https://via.placeholder.com/250"
+          imageUrl="/resorts.jpg"
           title="Resorts"
           subtitle="7,541"
         />
         <Card
           height="150px"
-          imageUrl="https://via.placeholder.com/250"
+          imageUrl="/apartments.jpg"
           title="Apartments"
           subtitle="13,005"
         />
       </Column>
-      <Title>Top Trending Hotels</Title>
-      <Subtitle>
-        Discover most trending hotels worldwide for an unforgettable experience
-      </Subtitle>
+      <Headings>
+        <Title>Top Trending Hotels</Title>
+        <Subtitle>
+          Discover most trending hotels worldwide for an unforgettable
+          experience
+        </Subtitle>
+      </Headings>
       <Column>
         <Card
           height="250px"
-          imageUrl="https://via.placeholder.com/250"
-          title="Villas"
-          subtitle="10,804"
+          imageUrl="/trending1.jpg"
+          location="Dehradun, India"
+          price="10,120"
         />
         <Card
           height="250px"
-          imageUrl="https://via.placeholder.com/250"
-          title="Cabins"
-          subtitle="12,458"
+          imageUrl="/trending2.jpg"
+          location="Shimla, India"
+          price="8,000"
         />
         <Card
           height="250px"
-          imageUrl="https://via.placeholder.com/250"
-          title="Resorts"
-          subtitle="7,541"
+          imageUrl="/trending3.jpg"
+          location="Manali, India"
+          price="5,000"
         />
         <Card
           height="250px"
-          imageUrl="https://via.placeholder.com/250"
-          title="Apartments"
-          subtitle="13,005"
+          imageUrl="/trending4.jpg"
+          location="Jibhi, India"
+          price="13,005"
         />
       </Column>
     </Container>

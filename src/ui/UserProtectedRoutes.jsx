@@ -21,7 +21,7 @@ const UserProtectedRoutes = ({ children }) => {
   //if there is no auth user , redirect
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
-      navigate("/login");
+      navigate("/home");
     }
   }, [isAuthenticated, isLoading, navigate]);
 
