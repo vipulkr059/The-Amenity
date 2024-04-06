@@ -158,13 +158,13 @@ export async function createBooking(booking) {
 export async function getBookingByGuestId(id) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*")
+    .select("status , numGuests, numNights, totalPrice, id")
     .eq("guestId", id);
 
   if (error) {
     console.error(error);
     throw new Error("Booking not found for this guest");
   }
-
+  console.log(data);
   return data;
 }

@@ -67,29 +67,40 @@ const LandingNav = () => {
 
       <NavbarLinks>
         <NavbarLink onClick={() => navigate("/home")}>Home</NavbarLink>
-        <NavbarLink onClick={() => navigate("/home")}>Explore</NavbarLink>
-        {user.user_metadata.isAdmin && (
-          <NavbarLink onClick={() => navigate("/dashboard")}>
-            Dashboard
-          </NavbarLink>
+        <NavbarLink
+          onClick={() => (user ? navigate("/explore") : navigate("/login"))}
+        >
+          Explore
+        </NavbarLink>
+        {user && user.user_metadata.isAdmin && (
+          <>
+            <NavbarLink onClick={() => navigate("/dashboard")}>
+              Dashboard
+            </NavbarLink>
+          </>
         )}
       </NavbarLinks>
 
       <NavbarLinks>
-        <NavbarLink onClick={() => navigate("/profile")}>
-          <UserAvatar />
-        </NavbarLink>
-        <NavbarLink>
-          <DarkModeToggle />
-        </NavbarLink>
         {!user && (
           <>
-            <NavbarLink>Log In</NavbarLink>
-            <NavbarLink>Sign Up</NavbarLink>
+            <NavbarLink onClick={() => navigate("/login")}>Log In</NavbarLink>
+            <NavbarLink onClick={() => navigate("/signup")}>Sign Up</NavbarLink>
+          </>
+        )}
+
+        {user && (
+          <>
+            <NavbarLink onClick={() => navigate("/profile")}>
+              <UserAvatar />
+            </NavbarLink>
+            <NavbarLink>
+              <Logout />
+            </NavbarLink>
           </>
         )}
         <NavbarLink>
-          <Logout />
+          <DarkModeToggle />
         </NavbarLink>
       </NavbarLinks>
     </NavbarContainer>

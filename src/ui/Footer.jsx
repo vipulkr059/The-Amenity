@@ -27,12 +27,12 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} The Amenity, Designed and Developed by
         @vipulkr059
       </div>
-      <FooterLinks>
+      {/* <FooterLinks>
         <FooterLink href="#">Home</FooterLink>
         <FooterLink href="#">About Us</FooterLink>
         <FooterLink href="#">Services</FooterLink>
         <FooterLink href="#">Contact</FooterLink>
-      </FooterLinks>
+      </FooterLinks> */}
     </FooterContainer>
   );
 };

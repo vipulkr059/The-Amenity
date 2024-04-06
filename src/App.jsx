@@ -49,7 +49,7 @@ export default function App() {
               }
             >
               <Route index element={<Navigate replace to="home" />} />
-              <Route path="home" element={<HomePage />} />
+
               <Route path="explore" element={<LandingPage />} />
               <Route path="booking/:id" element={<Reservation />} />
               <Route path="profile" element={<UserProfile />} />
@@ -71,6 +71,7 @@ export default function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="account" element={<Account />} />
             </Route>
+            <Route path="home" element={<HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignupForm />} />
             <Route path="*" element={<PageNotFound />} />

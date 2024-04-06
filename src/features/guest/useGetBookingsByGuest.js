@@ -4,13 +4,13 @@ import { getBookingByGuestId } from "../../services/apiBookings";
 export function useGetBookingsByGuest(guestId) {
   const {
     isLoading,
-    data: guestBookings,
+    data: guestBooking,
     error,
   } = useQuery({
     queryKey: ["guestBookings"],
     queryFn: () => getBookingByGuestId(guestId),
     retry: false,
   });
-
-  return { isLoading, guestBookings, error };
+  console.log(guestBooking);
+  return { isLoading, guestBooking, error };
 }

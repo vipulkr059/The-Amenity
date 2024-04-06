@@ -5,6 +5,7 @@ import HomPageTrending from "../ui/HomPageTrending";
 import PromoCards from "../ui/PromoCards";
 import HomeFeatures from "../ui/HomeFeatures";
 import Footer from "../ui/Footer";
+import LandingNav from "../ui/LandingNav";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const HomePageContainer = styled.div`
 export default function HomePage() {
   return (
     <HomePageContainer>
+      <LandingNav />
       <HomeImage />
       <HomPageTrending />
       <PromoCards />
