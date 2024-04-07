@@ -41,22 +41,24 @@ const Carousel = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentFilter = searchParams.get("category") || icons.at(0).label;
-  const handleClick = (value) => {
-    searchParams.set("category", value);
-    setSearchParams(searchParams);
-  };
-  const [index, setIndex] = useState(0);
+
+  const [startIndex, setStartIndex] = useState(0);
 
   const nextSlide = () => {
-    setIndex((prevIndex) =>
-      prevIndex === icons.length - 1 ? 0 : prevIndex + 1
-    );
+    if (startIndex + 5 < icons.length) {
+      setStartIndex((prevIndex) => prevIndex + 5);
+    }
   };
 
   const prevSlide = () => {
-    setIndex((prevIndex) =>
-      prevIndex === 0 ? icons.length - 1 : prevIndex - 1
-    );
+    if (startIndex - 5 >= 0) {
+      setStartIndex((prevIndex) => prevIndex - 5);
+    }
+  };
+
+  const handleClick = (value) => {
+    searchParams.set("category", value);
+    setSearchParams(searchParams);
   };
 
   return (
@@ -66,14 +68,9 @@ const Carousel = () => {
         style={{ fontSize: "2rem", cursor: "pointer" }}
       />
       <StoryContainer>
-        {icons.map((IconComponent, i) => (
+        {icons.slice(startIndex, startIndex + 5).map((IconComponent, i) => (
           <IconWrapper
-            key={i}
-            // style={{
-            //   transform: `translateX(${(i - index) * 50}%) scale(${
-            //     i === index ? 1.1 : 0.8
-            //   })`,
-            // }}
+            key={i + startIndex}
             onClick={() => handleClick(IconComponent.label)}
             active={IconComponent.label === currentFilter}
             disabled={IconComponent.label === currentFilter}

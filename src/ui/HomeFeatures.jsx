@@ -51,6 +51,12 @@ const SmallCard = styled.div`
   background-position: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 `;
 
 const BigCard = styled.div`
@@ -74,6 +80,12 @@ const BigCard = styled.div`
   background-position: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 `;
 
 const Title = styled.h2`

@@ -10,6 +10,12 @@ const CardWrapper = styled.div`
   border-radius: 15px;
   padding: 20px;
   margin: 10px;
+
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -47,9 +53,17 @@ const Subtitle = styled.h3`
   color: var(--color-grey-500);
 `;
 
-const Card = ({ imageUrl, title, subtitle, height, location, price }) => {
+const Card = ({
+  imageUrl,
+  title,
+  subtitle,
+  height,
+  location,
+  price,
+  onClick,
+}) => {
   return (
-    <CardWrapper>
+    <CardWrapper onClick={onClick}>
       {title && subtitle && (
         <>
           <Title>{title}</Title>

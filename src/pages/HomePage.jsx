@@ -6,6 +6,7 @@ import PromoCards from "../ui/PromoCards";
 import HomeFeatures from "../ui/HomeFeatures";
 import Footer from "../ui/Footer";
 import LandingNav from "../ui/LandingNav";
+import MobileNavbar from "../ui/MobileNav";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -17,8 +18,18 @@ const HomePageContainer = styled.div`
 export default function HomePage() {
   return (
     <HomePageContainer>
-      <LandingNav />
       <HomeImage />
+      <LandingNav
+        width={"100%"}
+        background={"tranparent"}
+        position={"absolute"}
+        color={"white"}
+      />
+      <MobileNavbar
+        position={"absolute"}
+        background={"tranparent"}
+        width={"100%"}
+      />
       <HomPageTrending />
       <PromoCards />
       <HomeFeatures />

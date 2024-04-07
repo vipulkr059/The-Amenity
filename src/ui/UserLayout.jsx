@@ -37,6 +37,7 @@ function UserLayout() {
       <Outlet />
       {/* </Container> */}
       {/* </Main> */}
+      <Footer />
     </StyledAppLayout>
   );
 }

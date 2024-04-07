@@ -7,7 +7,7 @@ const StyledUserAvatar = styled.div`
   align-items: center;
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--color-grey-600);
+  color: ${(props) => props.color || "var(--color-grey-600)"};
 `;
 
 const Avatar = styled.img`
@@ -21,12 +21,12 @@ const Avatar = styled.img`
   outline: 2px solid var(--color-grey-300);
 `;
 
-function UserAvatar() {
+function UserAvatar({ color }) {
   const { user } = useUser();
   const { fullName, avatar } = user?.user_metadata;
 
   return (
-    <StyledUserAvatar>
+    <StyledUserAvatar color={color}>
       <Avatar
         src={avatar || "default-user.jpg"}
         alt={`Avatar of ${fullName ? fullName : "user"}`}

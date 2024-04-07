@@ -8,6 +8,11 @@ import { useCabins } from "../features/cabins/useCabins";
 import IconCarousel from "../ui/IconCarousel";
 import { CabinTableOperations } from "../features/cabins/CabinTableOperations";
 import { useSearchParams } from "react-router-dom";
+import {
+  filterAccommodations,
+  filterCabins,
+  sortCabins,
+} from "../utils/filters";
 
 const CardContainer = styled.div`
   display: grid;
@@ -40,7 +45,7 @@ const CarouselContainer = styled.div`
 
 const CarouselContent = styled.div`
   flex: 1;
-  min-width: 0; /* Ensure flex items can shrink */
+  min-width: 0;
 `;
 
 export const LandingPage = () => {
@@ -50,30 +55,16 @@ export const LandingPage = () => {
   const filterValue = searchParams.get("discount") || "all";
   const categoryFilter = searchParams.get("category") || "all";
 
-  let filteredCabins;
-  if (filterValue === "all") filteredCabins = cabins;
-  if (filterValue === "no-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
-  if (filterValue === "with-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
+  let filteredCabins = filterCabins(cabins, filterValue);
 
-  // 2) SORT
   const sortBy = searchParams.get("sortBy") || "startDate-asc";
   const [field, direction] = sortBy.split("-");
-  const modifier = direction === "asc" ? 1 : -1;
-  let sortedCabins = filteredCabins.sort(
-    (a, b) => (a[field] - b[field]) * modifier
-  );
+
+  let sortedCabins = sortCabins(filteredCabins, field, direction);
 
   //3) Category Filter
 
-  if (categoryFilter === "all") sortedCabins = sortedCabins;
-  if (categoryFilter === "Cabin")
-    sortedCabins = sortedCabins.filter((cabin) => cabin.category === "cabin");
-  if (categoryFilter === "Mountain")
-    sortedCabins = sortedCabins.filter(
-      (cabin) => cabin.category === "mountain"
-    );
+  sortedCabins = filterAccommodations(sortedCabins, categoryFilter);
 
   return (
     <LandingLayout>

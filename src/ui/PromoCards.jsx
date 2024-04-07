@@ -20,6 +20,11 @@ const CardWrapper = styled.div`
   width: 100%;
   height: 320px;
   margin: 50px;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const Card = styled.div`
