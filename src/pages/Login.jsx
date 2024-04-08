@@ -6,11 +6,14 @@ import Heading from "../ui/Heading";
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 48rem;
+  grid-template-columns: 1fr;
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 48rem; /* Adjust layout for screens wider than 768px */
+  }
 `;
 
 const Login = () => {

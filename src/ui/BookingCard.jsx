@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Modal from "./Modal";
 import { useDeleteBooking } from "../features/bookings/useDeleteBooking";
 import ConfirmDelete from "./ConfirmDelete";
+import Tag from "./Tag";
+import { statusToTagName } from "../data/data-bookings";
+import BookingDataBox from "../features/bookings/BookingDataBox";
 
 const Card = styled.div`
   background-color: var(--color-grey-0);
@@ -10,13 +13,8 @@ const Card = styled.div`
   padding: 20px;
 `;
 
-const CardImage = styled.img`
-  width: 100%;
-  border-radius: 10px;
-`;
-
 const CardText = styled.p`
-  margin-top: 10px;
+  margin: 20px;
 `;
 
 const CancelButton = styled.button`
@@ -29,25 +27,28 @@ const CancelButton = styled.button`
   margin-top: 10px;
 `;
 
-const BookingCard = ({ numNights, totalPrice, numGuests, id, status }) => {
+const BookingCard = ({ booking }) => {
   const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { numNights, numGuests, totalPrice, status } = booking;
   return (
     <Card>
-      {/* <CardImage src={imageUrl} alt="Card" /> */}
-      <CardText>{totalPrice}</CardText>
-      <CardText>{numGuests}</CardText>
-      <CardText>{numNights}</CardText>
-      <Modal>
-        <Modal.Open opens="delete">
-          <CancelButton>Cancel</CancelButton>
-        </Modal.Open>
-        <Modal.Window name="delete">
-          <ConfirmDelete
-            resource="booking"
-            onConfirm={() => deleteBooking(id)}
-          />
-        </Modal.Window>
-      </Modal>
+      <CardText>
+        <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      </CardText>
+      <BookingDataBox booking={booking} />
+      {status === "unconfirmed" && (
+        <Modal>
+          <Modal.Open opens="delete">
+            <CancelButton>Cancel</CancelButton>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resource="booking"
+              onConfirm={() => deleteBooking(id)}
+            />
+          </Modal.Window>
+        </Modal>
+      )}
     </Card>
   );
 };

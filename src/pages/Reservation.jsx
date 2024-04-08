@@ -5,6 +5,9 @@ import BookingForm from "../ui/BookingForm";
 import { useCabinById } from "../features/cabins/useCabinById";
 import Spinner from "../ui/Spinner";
 import { CabinDetails } from "../ui/CabinDetails";
+import { useMoveBack } from "../hooks/useMoveBack";
+import ButtonText from "../ui/ButtonText";
+import { flushSync } from "react-dom";
 
 // Styled Components
 const Container = styled.div`
@@ -83,6 +86,7 @@ const MainImage = styled.img`
 
 const Reservation = () => {
   const { cabin, isLoading } = useCabinById();
+  const moveBack = useMoveBack();
   if (isLoading) return <Spinner />;
   const { images } = cabin;
 
@@ -90,6 +94,17 @@ const Reservation = () => {
 
   return (
     <Container>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+          width: "100%",
+          padding: "25px",
+        }}
+      >
+        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+      </div>
       <ImagesContainer>
         {/* Main image */}
         <MainImage src={mainImage} alt="Main" />
@@ -99,15 +114,6 @@ const Reservation = () => {
       </ImagesContainer>
       <InfoSection>
         <InfoLeft>
-          {/* <h2 >Hotel Information</h2>
-          <p>Hotel Name: {name}</p>
-          <p>Location: City, Country</p>
-          <p>
-            {description}
-            {description}
-            {description}
-            {description}
-          </p> */}
           <CabinDetails cabin={cabin} />
         </InfoLeft>
         <InfoRight>

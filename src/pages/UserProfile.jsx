@@ -8,35 +8,40 @@ import BookingCard from "../ui/BookingCard";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const Container = styled.div`
-  height: 100vh;
+  background-color: var(--color-grey-50);
   display: flex;
   flex-direction: column;
   gap: 8rem;
-  padding: 20px; /* Add padding */
-  margin: 20px; /* Add margin */
+  padding: 20px;
+  margin: 20px;
+  height: 100vh;
+  overflow-y: auto;
 `;
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(650px, 1fr));
   gap: 20px;
   background-color: var(--color-grey-100);
   padding: 10px;
   border-radius: 15px;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    padding: 0px;
+  }
 `;
 const BannerContainer = styled.div`
-  /* width: 100%; */
   height: 200px;
   background-color: black;
   position: relative;
-  border-radius: 15px; /* Rounded border */
+  border-radius: 15px;
 `;
 
 const ProfileContainer = styled.div`
   position: absolute;
   bottom: -60px;
   left: 20px;
-  width: calc(100% - 40px); /* Subtract padding from width */
+  width: calc(100% - 40px);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -49,22 +54,39 @@ const ProfilePhoto = styled.img`
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+
+  @media screen and (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 const ProfileName = styled.h1`
   color: #fff;
   font-size: 24px;
   margin-left: 20px;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const Heading = styled.div`
-  background-color: var(--color-grey-100);
   display: flex;
   align-items: center;
   gap: 2rem;
   font-size: 3rem;
   border-radius: 15px;
   padding: 10px;
+  background-color: var(--color-grey-100);
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
 `;
 
 const UserProfile = () => {
@@ -78,19 +100,14 @@ const UserProfile = () => {
     guestBooking,
     isLoading: bookingsLoading,
     error: bookingsError,
-  } = useGetBookingsByGuest(5);
+  } = useGetBookingsByGuest(guest?.id);
 
   if (userLoading || guestLoading || bookingsLoading) return <Spinner />;
 
   return (
     <Container>
-      <BannerContainer
-        style={{
-          backgroundImage: `url(${"/png/logo-no-background.png"})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <BannerContainer>
+        <Image src={"/png/logo-no-background.png"} />
         <ProfileContainer>
           <ProfilePhoto
             src={
@@ -112,17 +129,9 @@ const UserProfile = () => {
       <CardContainer>
         {guestBooking &&
           guestBooking.map((booking) => {
-            return (
-              <BookingCard
-                key={booking.id}
-                numGuests={booking.numGuests}
-                numNights={booking.numNights}
-                totalPrice={booking.totalPrice}
-                status={booking.status}
-                id={booking.id}
-              />
-            );
+            return <BookingCard booking={booking} />;
           })}
+        {!guestBooking && <p>No Booking yet</p>}
       </CardContainer>
     </Container>
   );

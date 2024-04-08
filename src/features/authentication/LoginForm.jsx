@@ -8,11 +8,13 @@ import Heading from "../../ui/Heading";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 import { useLogin } from "./useLogin";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading } = useLogin();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,6 +57,18 @@ function LoginForm() {
         <Button size="large" disabled={isLoading}>
           {!isLoading ? "Log In" : <SpinnerMini />}
         </Button>
+      </FormRow>
+      <FormRow orientation="vertical">
+        <p
+          style={{
+            cursor: "pointer",
+            textDecoration: "underline",
+            color: "var(--color-indigo-700)",
+          }}
+          onClick={() => navigate("/signup")}
+        >
+          New User ? Create Account
+        </p>
       </FormRow>
       <FormRow orientation="vertical">
         <p>Demo Account</p>

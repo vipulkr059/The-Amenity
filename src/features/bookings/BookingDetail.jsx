@@ -16,7 +16,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useCheckout } from "../check-in-out/useCheckOut";
 import ButtonText from "../../ui/ButtonText";
 import { useDeleteBooking } from "./useDeleteBooking";
-// import Empty from "../..ui/Empty";
+import { statusToTagName } from "../../data/data-bookings";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -34,12 +34,6 @@ function BookingDetail() {
 
   if (isLoading) return <Spinner />;
   if (!booking) return <Empty resource="booking" />;
-
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
 
   const { id: bookingId, status } = booking;
 
