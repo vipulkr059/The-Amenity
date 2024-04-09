@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
 import styled from "styled-components";
 import LandingNav from "./LandingNav";
 import MobileNavbar from "./MobileNav";
@@ -32,11 +30,7 @@ function UserLayout() {
     <StyledAppLayout>
       <LandingNav />
       <MobileNavbar />
-      {/* <Main>
-        <Container> */}
       <Outlet />
-      {/* </Container> */}
-      {/* </Main> */}
       <Footer />
     </StyledAppLayout>
   );

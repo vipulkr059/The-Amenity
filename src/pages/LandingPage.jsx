@@ -1,9 +1,7 @@
 import React from "react";
-import LandingNav from "../ui/LandingNav";
 import CabinCard from "../ui/CabinCards";
 import styled from "styled-components";
 import Spinner from "../ui/Spinner";
-
 import { useCabins } from "../features/cabins/useCabins";
 import IconCarousel from "../ui/IconCarousel";
 import { CabinTableOperations } from "../features/cabins/CabinTableOperations";
@@ -61,8 +59,6 @@ export const LandingPage = () => {
   const [field, direction] = sortBy.split("-");
 
   let sortedCabins = sortCabins(filteredCabins, field, direction);
-
-  //3) Category Filter
 
   sortedCabins = filterAccommodations(sortedCabins, categoryFilter);
 

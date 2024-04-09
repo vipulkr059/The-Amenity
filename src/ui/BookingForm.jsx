@@ -38,12 +38,14 @@ const Label = styled.label`
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   font-size: 14px;
   outline: none;
+  border: 1px solid var(--color-grey-300);
+  background-color: var(--color-grey-0);
+  border-radius: var(--border-radius-sm);
+  padding: 0.8rem 1.2rem;
+  box-shadow: var(--shadow-sm);
 
   &:focus {
     border-color: #007bff;
@@ -108,7 +110,7 @@ function BookingForm() {
       const nights = subtractDates(watch("endDate"), watch("startDate"));
       setNumNights(nights);
       const stayCharge = nights * cabin.regularPrice;
-      const additionals = 5 * watch("numGuests");
+      const additionals = watch("hasBreakfast") ? 5 * watch("numGuests") : 0;
 
       setTotalPrice(stayCharge + additionals);
     }

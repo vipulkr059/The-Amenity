@@ -7,9 +7,7 @@ import Spinner from "../ui/Spinner";
 import { CabinDetails } from "../ui/CabinDetails";
 import { useMoveBack } from "../hooks/useMoveBack";
 import ButtonText from "../ui/ButtonText";
-import { flushSync } from "react-dom";
 
-// Styled Components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,27 +23,27 @@ const InfoSection = styled.div`
   border-radius: 15px;
   margin: 80px;
   @media (max-width: 768px) {
-    flex-direction: column; /* Stack images vertically on smaller devices */
-    margin: 20px; /* Adjust margin */
+    flex-direction: column;
+    margin: 20px;
   }
 `;
 
 const InfoLeft = styled.div`
   flex: 1;
-  max-height: 650px; /* Set a maximum height to enable scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 650px;
+  overflow-y: auto;
   margin-left: 20px;
-  overflow-y: scroll; /* Show scrollbar only when needed */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
-    width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
+    width: 0;
   }
 
   @media (max-width: 768px) {
-    max-height: none; /* Remove maximum height on smaller devices */
-    margin-left: 0; /* Reset margin */
-    margin-bottom: 20px; /* Add some bottom margin for better spacing */
+    max-height: none;
+    margin-left: 0;
+    margin-bottom: 20px;
   }
 `;
 
@@ -53,11 +51,11 @@ const InfoRight = styled.div`
   flex: 1;
   margin-left: 20px;
   position: sticky;
-  top: 0; /* Stick to the top */
+  top: 0;
 
   @media (max-width: 768px) {
-    margin-left: 0; /* Reset margin */
-    margin-bottom: 20px; /* Add some bottom margin for better spacing */
+    margin-left: 0;
+    margin-bottom: 20px;
   }
 `;
 
@@ -68,8 +66,8 @@ const ImagesContainer = styled.div`
   width: 70%;
 
   @media (max-width: 768px) {
-    flex-direction: column; /* Stack images vertically on smaller devices */
-    margin: 20px; /* Adjust margin */
+    flex-direction: column;
+    margin: 20px;
   }
 `;
 
@@ -79,8 +77,8 @@ const MainImage = styled.img`
 
   @media (max-width: 768px) {
     width: 100%;
-    max-width: none; /* Remove max-width on smaller devices */
-    height: auto; /* Ensure image maintains aspect ratio */
+    max-width: none;
+    height: auto;
   }
 `;
 
@@ -90,7 +88,7 @@ const Reservation = () => {
   if (isLoading) return <Spinner />;
   const { images } = cabin;
 
-  const mainImage = images[0]; // First image is the main image
+  const mainImage = images[0];
 
   return (
     <Container>

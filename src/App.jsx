@@ -24,6 +24,7 @@ import UserProtectedRoutes from "./ui/UserProtectedRoutes";
 import UserLayout from "./ui/UserLayout";
 import UserProfile from "./pages/UserProfile";
 import HomePage from "./pages/HomePage";
+import Signup from "./pages/SignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,7 +74,7 @@ export default function App() {
             </Route>
             <Route path="home" element={<HomePage />} />
             <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignupForm />} />
+            <Route path="signup" element={<Signup />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
+import { useMoveBack } from "../hooks/useMoveBack";
+import ButtonText from "../ui/ButtonText";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -14,8 +16,12 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
+  const moveBack = useMoveBack();
+
   return (
     <StyledHeader>
+      <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+
       <UserAvatar />
       <HeaderMenu />
     </StyledHeader>

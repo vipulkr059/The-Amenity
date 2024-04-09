@@ -29,7 +29,7 @@ const CancelButton = styled.button`
 
 const BookingCard = ({ booking }) => {
   const { deleteBooking, isDeleting } = useDeleteBooking();
-  const { numNights, numGuests, totalPrice, status } = booking;
+  const { status } = booking;
   return (
     <Card>
       <CardText>
