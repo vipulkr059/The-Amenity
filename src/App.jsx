@@ -57,7 +57,6 @@ export default function App() {
                 }
               >
                 <Route index element={<Navigate replace to="home" />} />
-
                 <Route path="explore" element={<LandingPage />} />
                 <Route path="booking/:id" element={<Reservation />} />
                 <Route path="profile" element={<UserProfile />} />
