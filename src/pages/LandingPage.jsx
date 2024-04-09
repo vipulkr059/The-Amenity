@@ -46,7 +46,7 @@ const CarouselContent = styled.div`
   min-width: 0;
 `;
 
-export const LandingPage = () => {
+const LandingPage = () => {
   const { cabins, isLoading } = useCabins();
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
@@ -80,3 +80,5 @@ export const LandingPage = () => {
     </LandingLayout>
   );
 };
+
+export default LandingPage;

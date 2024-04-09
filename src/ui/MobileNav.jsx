@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import UserAvatar from "../features/authentication/UserAvatar";
 import Logo from "./Logo";
 import DarkModeToggle from "./DarkModeToggle";
 import { useUser } from "../features/authentication/useUser";
@@ -15,8 +14,7 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  /* background-color: var(--color-grey-0);
-  position: relative; */
+
   height: 7rem;
   z-index: 2;
   position: ${(props) => props.position || "static"};
@@ -24,7 +22,6 @@ const NavbarContainer = styled.div`
   background-color: ${(props) => props.background || "var(--color-grey-0)"};
 
   @media (min-width: 769px) {
-    /* Hide the mobile navbar container on larger screens */
     display: none;
   }
 `;
@@ -102,26 +99,15 @@ const MobileNavbar = ({ position, width, background }) => {
           </NavbarLink>
         )}
 
-        {/* <NavbarLink>
-          <UserAvatar />
-        </NavbarLink>
-        <NavbarLink>
-          <DarkModeToggle />
-        </NavbarLink> */}
         {!user && (
           <>
             <NavbarLink>Log In</NavbarLink>
             <NavbarLink>Sign Up</NavbarLink>
           </>
         )}
-        {/* <NavbarLink>
-          <Logout />
-        </NavbarLink> */}
+
         {user && (
           <>
-            {/* <NavbarLink onClick={() => navigate("/profile")}>
-              <UserAvatar />
-            </NavbarLink> */}
             <NavbarLink>
               <ButtonIcon onClick={() => navigate("/profile")}>
                 <HiOutlineUser />
