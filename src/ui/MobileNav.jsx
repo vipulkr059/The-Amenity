@@ -101,8 +101,8 @@ const MobileNavbar = ({ position, width, background }) => {
 
         {!user && (
           <>
-            <NavbarLink>Log In</NavbarLink>
-            <NavbarLink>Sign Up</NavbarLink>
+            <NavbarLink onClick={() => navigate("/login")}>Log In</NavbarLink>
+            <NavbarLink onClick={() => navigate("/signup")}>Sign Up</NavbarLink>
           </>
         )}
 
