@@ -12,11 +12,11 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-const ProtectedRoutes = ({ children }) => {
+const AdminProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
 
   // Load the authenticated user
-  const { user, isLoading, isAuthenticated, isReadOnly } = useUser();
+  const { user, isLoading, isAuthenticated } = useUser();
 
   //if there is no auth user , redirect
   useEffect(() => {
@@ -32,9 +32,9 @@ const ProtectedRoutes = ({ children }) => {
         <Spinner />
       </FullPage>
     );
-
+  const isAdmin = user.user_metadata.isAdmin;
   //if user render app
-  if (isAuthenticated || isReadOnly) return children;
+  if (isAuthenticated && isAdmin) return children;
 };
 
-export default ProtectedRoutes;
+export default AdminProtectedRoutes;

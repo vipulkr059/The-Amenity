@@ -40,8 +40,11 @@ export async function signup({ email, password, fullName }) {
     email,
     password,
     options: {
-      fullName,
-      avatar: "",
+      data: {
+        fullName,
+        avatar: "",
+        isAdmin: true,
+      },
     },
   });
 
@@ -51,6 +54,43 @@ export async function signup({ email, password, fullName }) {
 
   return data;
 }
+
+// export async function signup({ email, password, fullName }) {
+//   try {
+//     // Sign up the user
+//     const { user, error } = await supabase.auth.signUp({
+//       email,
+//       password,
+//       options: {
+//         fullName,
+//         avatar: "",
+//       },
+//     });
+
+//     if (error) {
+//       console.error("Error signing up admin:", error.message);
+//       return { error: "Failed to sign up" };
+//     }
+
+//     // Set custom claim indicating admin status
+//     const { error: updateError } = await supabase.auth.api.updateUser(user.id, {
+//       app_metadata: { isAdmin: true },
+//     });
+
+//     if (updateError) {
+//       console.error(
+//         "Error setting custom claim for admin:",
+//         updateError.message
+//       );
+//       return { error: "Failed to set custom claim" };
+//     }
+
+//     return { user };
+//   } catch (error) {
+//     console.error("Error signing up admin:", error.message);
+//     return { error: "Internal server error" };
+//   }
+// }
 
 export async function updateCurrentUser({ password, fullName, avatar }) {
   // 1. Update password OR fullName
@@ -81,4 +121,24 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
 
   if (error2) throw new Error(error2.message);
   return updatedUser;
+}
+
+export async function userSignup({ email, password, fullName }) {
+  let { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fullName,
+        avatar: "",
+        isAdmin: false,
+      },
+    },
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
 }

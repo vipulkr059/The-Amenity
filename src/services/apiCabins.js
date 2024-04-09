@@ -109,7 +109,10 @@ export async function createCabin(newCabin, id) {
   let query = supabase.from("cabins");
 
   // A) CREATE
-  if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
+  if (!id)
+    query = query.insert([
+      { ...newCabin, image: imagePath, images: [imagePath] },
+    ]);
 
   // B) EDIT
   if (id) query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
@@ -135,6 +138,20 @@ export async function createCabin(newCabin, id) {
     throw new Error(
       "Cabin image could not be uploaded and the cabin was not created"
     );
+  }
+
+  return data;
+}
+
+export async function getCabinById(id) {
+  const { data, error } = await supabase
+    .from("cabins")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw new Error("Something wrong with cabin data");
   }
 
   return data;
