@@ -72,7 +72,7 @@ function LoginForm() {
       </FormRow>
       <FormRow orientation="vertical">
         <p>Demo Account</p>
-        <p>User : DevAmenity@amentiy.com - Pwd : 12345678</p>
+        <p>User : DevAmenity@amenity.com - Pwd : 12345678</p>
       </FormRow>
     </Form>
   );
