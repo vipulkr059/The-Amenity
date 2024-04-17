@@ -10,7 +10,7 @@ const CardWrapper = styled.div`
   border-radius: 15px;
   padding: 20px;
   margin: 10px;
-
+  cursor: pointer;
   transition: all 0.4s ease-in-out;
 
   &:hover {

@@ -39,6 +39,7 @@ const NavbarLinks = styled.ul`
 `;
 
 const LogoContainer = styled.div`
+  cursor: pointer;
   @media (max-width: 768px) {
     margin-bottom: 20px;
   }

@@ -5,6 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { BsFire } from "react-icons/bs";
 import ButtonIcon from "./ButtonIcon";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../features/authentication/useUser";
 
 const Container = styled.div`
   display: flex;
@@ -47,14 +48,18 @@ const Headings = styled.div`
 `;
 
 function HomPageTrending() {
+  const { user } = useUser();
   const navigate = useNavigate();
+
   return (
     <Container>
       <Headings>
         {" "}
         <Title>
           Discover your destination&nbsp;
-          <ButtonIcon onClick={() => navigate("/explore")}>
+          <ButtonIcon
+            onClick={() => (user ? navigate("/explore") : navigate("/login"))}
+          >
             <FaArrowRightLong />
           </ButtonIcon>
         </Title>
@@ -68,28 +73,28 @@ function HomPageTrending() {
           imageUrl="/villas.jpg"
           title="Villas"
           subtitle="10,804"
-          onClick={() => navigate("/explore")}
+          onClick={() => (user ? navigate("/explore") : navigate("/login"))}
         />
         <Card
           height="150px"
           imageUrl="/cabin.jpg"
           title="Cabins"
           subtitle="12,458"
-          onClick={() => navigate("/explore")}
+          onClick={() => (user ? navigate("/explore") : navigate("/login"))}
         />
         <Card
           height="150px"
           imageUrl="/resorts.jpg"
           title="Resorts"
           subtitle="7,541"
-          onClick={() => navigate("/explore")}
+          onClick={() => (user ? navigate("/explore") : navigate("/login"))}
         />
         <Card
           height="150px"
           imageUrl="/apartments.jpg"
           title="Apartments"
           subtitle="13,005"
-          onClick={() => navigate("/explore")}
+          onClick={() => (user ? navigate("/explore") : navigate("/login"))}
         />
       </Column>
       <Headings>

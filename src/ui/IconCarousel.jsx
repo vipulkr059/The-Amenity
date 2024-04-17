@@ -29,6 +29,7 @@ const IconWrapper = styled.div`
   font-size: 3rem;
   margin: 0 10px;
   transition: transform 0.2s ease;
+  cursor: pointer;
   ${(props) =>
     props.active &&
     css`
